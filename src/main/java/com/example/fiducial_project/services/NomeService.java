@@ -18,6 +18,11 @@ public class NomeService {
         this.nomeRepository = nomeRepository;
     }
 
+    /**
+     * Insere uma lista de nomes no banco de dados
+     * Caso algum nome já exista, lança uma exceção
+     * @param listNames
+     */
     @Transactional
     public void insertListName(List<String> listNames) {
 
@@ -32,10 +37,19 @@ public class NomeService {
 
     }
 
+    /**
+     * Verifica se nome existe no banco de dados
+     * @param nome
+     * @return Boolean
+     */
     public Boolean existsNome(String nome){
         return nomeRepository.existsByNome(nome);
     }
 
+    /**
+     * Retorna todos os nomes cadastrados no banco de dados
+     * @return List<Nome>
+     */
     public List<Nome> getAllNames() {
         return nomeRepository.findAll();
     }

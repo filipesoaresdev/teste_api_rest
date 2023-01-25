@@ -16,6 +16,11 @@ public class NomeController {
     @Autowired
     private NomeService nomeService;
 
+    /**
+     * Método responsável por receber uma lista de nomes e inserir no banco de dados
+     * @param nomes
+     * @return ResponseEntity
+     */
     @PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> listNomes(@RequestBody List<String> nomes) {
         try {
@@ -26,6 +31,10 @@ public class NomeController {
         }
     }
 
+    /**
+     * Método responsável por retornar todos os nomes cadastrados no banco de dados
+     * @return
+     */
     @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getListNomes() {
         try {
@@ -36,7 +45,11 @@ public class NomeController {
         }
     }
 
-    @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    /**
+     * Método responsável por retornar se usuário existe no banco de dados
+     * @return
+     */
+    @GetMapping(value = "/userExists", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> existsNome(@RequestParam String nome) {
         try {
             return ResponseEntity.ok(nomeService.existsNome(nome)?true:false);
