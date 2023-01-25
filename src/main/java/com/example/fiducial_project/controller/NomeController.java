@@ -38,8 +38,7 @@ public class NomeController {
     @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getListNomes() {
         try {
-            nomeService.getAllNames();
-            return ResponseEntity.ok("Usuários adicionados com sucesso");
+            return ResponseEntity.ok(nomeService.getAllNames());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(),e);
         }
