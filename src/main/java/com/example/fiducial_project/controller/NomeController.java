@@ -1,5 +1,6 @@
 package com.example.fiducial_project.controller;
 
+import com.example.fiducial_project.exception.NomeException;
 import com.example.fiducial_project.services.NomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ public class NomeController {
 
     /**
      * Método responsável por receber uma lista de nomes e inserir no banco de dados
+     *
      * @param nomes
      * @return ResponseEntity
      */
@@ -26,34 +28,36 @@ public class NomeController {
         try {
             nomeService.insertListName(nomes);
             return ResponseEntity.ok("Usuários adicionados com sucesso");
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(),e);
+        } catch (NomeException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
         }
     }
 
     /**
      * Método responsável por retornar todos os nomes cadastrados no banco de dados
+     *
      * @return
      */
     @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getListNomes() {
         try {
             return ResponseEntity.ok(nomeService.getAllNames());
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(),e);
+        } catch (NomeException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
         }
     }
 
     /**
      * Método responsável por retornar se usuário existe no banco de dados
+     *
      * @return
      */
     @GetMapping(value = "/userExists", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> existsNome(@RequestParam String nome) {
         try {
-            return ResponseEntity.ok(nomeService.existsNome(nome)?true:false);
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(),e);
+            return ResponseEntity.ok(nomeService.existsNome(nome) ? true : false);
+        } catch (NomeException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
         }
     }
 
