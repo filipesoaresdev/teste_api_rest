@@ -24,9 +24,9 @@ public class NomeController {
      * @return ResponseEntity
      */
     @PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> listNomes(@RequestBody List<String> nomes) {
+    public ResponseEntity<?> listaNomes(@RequestBody List<String> nomes) {
         try {
-            nomeService.insertListName(nomes);
+            nomeService.inserirListaName(nomes);
             return ResponseEntity.ok("Usuários adicionados com sucesso");
         } catch (NomeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
@@ -39,9 +39,9 @@ public class NomeController {
      * @return
      */
     @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getListNomes() {
+    public ResponseEntity<?> getListaNomes() {
         try {
-            return ResponseEntity.ok(nomeService.getAllNames());
+            return ResponseEntity.ok(nomeService.getTodosNomes());
         } catch (NomeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
         }
@@ -53,9 +53,9 @@ public class NomeController {
      * @return
      */
     @GetMapping(value = "/userExists", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> existsNome(@RequestParam String nome) {
+    public ResponseEntity<Boolean> existeNome(@RequestParam String nome) {
         try {
-            return ResponseEntity.ok(nomeService.existsNome(nome) ? true : false);
+            return ResponseEntity.ok(nomeService.existeNome(nome) ? true : false);
         } catch (NomeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
         }

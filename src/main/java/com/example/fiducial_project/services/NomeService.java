@@ -27,7 +27,7 @@ public class NomeService {
      * @param listNames
      */
     @Transactional
-    public void insertListName(List<String> listNames) {
+    public void inserirListaName(List<String> listNames) {
 
         listNames.forEach(nome -> {
 
@@ -45,7 +45,7 @@ public class NomeService {
         if (!nome.matches("[A-Z a-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+")) {
             throw new NomeException(nome + " não possui um formato válido.");
         }
-        if (existsNome(nome)) {
+        if (existeNome(nome)) {
             throw new NomeException(nome + " já cadastrado ou nomes duplicados na requisição.");
         }
     }
@@ -56,7 +56,7 @@ public class NomeService {
      * @param nome
      * @return Boolean
      */
-    public Boolean existsNome(String nome) {
+    public Boolean existeNome(String nome) {
         return nomeRepository.existsByNome(nome);
     }
 
@@ -65,7 +65,7 @@ public class NomeService {
      *
      * @return List<Nome>
      */
-    public List<Nome> getAllNames() {
+    public List<Nome> getTodosNomes() {
         return nomeRepository.findAll();
     }
 

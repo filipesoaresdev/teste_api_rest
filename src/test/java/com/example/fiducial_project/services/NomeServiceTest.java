@@ -22,27 +22,27 @@ public class NomeServiceTest {
     private NomeRepository nomeRepository;
 
     @Test
-    public void testInsertListNome() {
+    public void testeInserirListaNomes() {
 
-        nomeService.insertListName(List.of("Jose", "João", "Filipe"));
-        Mockito.verify(nomeService, Mockito.times(3)).existsNome(ArgumentMatchers.anyString());
+        nomeService.inserirListaName(List.of("Jose", "João", "Filipe"));
+        Mockito.verify(nomeService, Mockito.times(3)).existeNome(ArgumentMatchers.anyString());
         Mockito.verify(nomeRepository, Mockito.times(3)).save(ArgumentMatchers.any(Nome.class));
     }
 
     @Test(expected = NomeException.class)
-    public void testInsertListNomeExistente() {
+    public void testeInserirListaNomeExistente() {
 
         Mockito.when(nomeRepository.existsByNome(ArgumentMatchers.anyString())).thenReturn(true);
-        nomeService.insertListName(List.of("Jose", "João", "Filipe"));
+        nomeService.inserirListaName(List.of("Jose", "João", "Filipe"));
     }
 
     @Test(expected = NomeException.class)
-    public void testInsertListNomeVazio() {
-        nomeService.insertListName(List.of("", "João", "Filipe"));
+    public void testeInserirListNomeVazio() {
+        nomeService.inserirListaName(List.of("", "João", "Filipe"));
     }
 
     @Test(expected = NomeException.class)
-    public void testInsertListNomeComCaracterErrado() {
-        nomeService.insertListName(List.of("334", "nome2", "nome3"));
+    public void testeInserirListaNomeComCaracterErrado() {
+        nomeService.inserirListaName(List.of("334", "nome2", "nome3"));
     }
 }
