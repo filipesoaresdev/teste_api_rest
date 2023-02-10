@@ -24,12 +24,12 @@ public class NomeService {
      * Insere uma lista de nomes no banco de dados
      * Caso algum nome já exista, lança uma exceção
      *
-     * @param listNames
+     * @param listaNomes
      */
     @Transactional
-    public void insertListName(List<String> listNames) {
+    public void inserirListaNome(List<String> listaNomes) {
 
-        listNames.forEach(nome -> {
+        listaNomes.forEach(nome -> {
 
             validaNome(nome);
             nomeRepository.save(new Nome(nome));
@@ -45,7 +45,7 @@ public class NomeService {
         if (!nome.matches("[A-Z a-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ]+")) {
             throw new NomeException(nome + " não possui um formato válido.");
         }
-        if (existsNome(nome)) {
+        if (existeNome(nome)) {
             throw new NomeException(nome + " já cadastrado ou nomes duplicados na requisição.");
         }
     }
@@ -56,7 +56,7 @@ public class NomeService {
      * @param nome
      * @return Boolean
      */
-    public Boolean existsNome(String nome) {
+    public Boolean existeNome(String nome) {
         return nomeRepository.existsByNome(nome);
     }
 
