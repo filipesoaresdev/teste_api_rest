@@ -30,6 +30,8 @@ public class NomeController {
             return ResponseEntity.ok("Usuários adicionados com sucesso");
         } catch (NomeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
         }
     }
 
@@ -42,7 +44,7 @@ public class NomeController {
     public ResponseEntity<?> getListaNomes() {
         try {
             return ResponseEntity.ok(nomeService.getTodosNomes());
-        } catch (NomeException e) {
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
         }
     }
